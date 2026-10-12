@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portafolio de Jonathan Aguilar: proyectos en C# y desarrollo web con HTML y CSS, habilidades y formulario de contacto.">
+  <meta name="author" content="Jonathan Aguilar">
+  <title>Jonathan Aguilar | Portafolio de desarrollo en C# y web</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Marca que JavaScript está activo: el menú móvil solo se oculta si el script puede abrirlo -->
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+  <!-- Enlace para que quien navega con teclado salte directo al contenido -->
+  <a class="saltar-contenido" href="#contenido">Saltar al contenido principal</a>
+
+  <header id="inicio">
+    <h1>Jonathan Aguilar</h1>
+    <p>Aprendiendo a construir software, línea por línea.</p>
+  </header>
+
+  <nav role="navigation" aria-label="Navegación principal">
+    <!-- Botón de menú (icono de hamburguesa): solo se muestra en pantallas pequeñas -->
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal">
+      <span class="icono-menu" aria-hidden="true"></span>
+      <span>Menú</span>
+    </button>
+
+    <ul id="menu-principal">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#sobre-mi">Acerca de mí</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <main id="contenido" role="main">
+
+    <section id="sobre-mi" aria-labelledby="titulo-sobre-mi">
+      <h2 id="titulo-sobre-mi">Acerca de mí</h2>
+      <p>
+        Hola, soy Jonathan. Me interesa la programación y estoy desarrollando mis primeras
+        aplicaciones en C# y mis primeras páginas web con HTML y CSS. Disfruto resolver
+        problemas paso a paso y escribir código claro y fácil de entender.
+      </p>
+    </section>
+
+    <section id="proyectos" aria-labelledby="titulo-proyectos">
+      <h2 id="titulo-proyectos">Proyectos</h2>
+
+      <div class="proyectos-grid">
+        <article>
+          <figure>
+            <img src="img/inventario.svg" width="600" height="360"
+                 alt="Captura de la consola del sistema de inventario: menú con cinco opciones y una tabla con los productos Manzana y Laptop con su precio y stock.">
+            <figcaption>Interfaz de consola del sistema de inventario</figcaption>
+          </figure>
+          <h3>Sistema de gestión de inventario</h3>
+          <p>Aplicación de consola en C# para añadir productos, actualizar el stock, ver la lista y eliminar productos.</p>
+        </article>
+
+        <article>
+          <figure>
+            <img src="img/biblioteca.svg" width="600" height="360"
+                 alt="Captura de la consola del sistema de biblioteca: lista de tres libros, uno marcado como prestado, y el contador de préstamos activos 1 de 3.">
+            <figcaption>Interfaz de consola del sistema de biblioteca</figcaption>
+          </figure>
+          <h3>Sistema de gestión de biblioteca</h3>
+          <p>Aplicación de consola en C# con búsqueda de libros y un límite de 3 préstamos a la vez.</p>
+        </article>
+
+        <article>
+          <figure>
+            <img src="img/personal.svg" width="600" height="360"
+                 alt="Diseño esquemático de una página web con encabezado azul, barra de navegación, texto principal y una barra lateral a la derecha.">
+            <figcaption>Esquema de la página personal</figcaption>
+          </figure>
+          <h3>Página personal</h3>
+          <p>Sitio web con HTML semántico y CSS (Flexbox, Grid y diseño adaptable a pantallas pequeñas).</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="habilidades" aria-labelledby="titulo-habilidades">
+      <h2 id="titulo-habilidades">Habilidades</h2>
+      <ul class="habilidades-lista">
+        <li>C# y .NET</li>
+        <li>HTML semántico</li>
+        <li>CSS (Flexbox y Grid)</li>
+        <li>JavaScript básico</li>
+        <li>Diseño de clases</li>
+        <li>Resolución de problemas</li>
+        <li>Git y control de versiones</li>
+        <li>Accesibilidad web</li>
+      </ul>
+    </section>
+
+    <section id="contacto" aria-labelledby="titulo-contacto">
+      <h2 id="titulo-contacto">Contacto</h2>
+      <p>¿Quieres hablar conmigo? Escríbeme con este formulario.</p>
+
+      <form action="#" method="post">
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required>
+        </div>
+
+        <div class="campo">
+          <label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" autocomplete="email" required>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Mensaje</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2026 Jonathan Aguilar. Todos los derechos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

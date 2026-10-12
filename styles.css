@@ -1,0 +1,480 @@
+/* =====================================================================
+   PASO 3 · ESTILOS BASICOS (body, cabecera y navegación)
+   ===================================================================== */
+
+/* Reinicio de márgenes y relleno.
+   Los prefijos -webkit- y -moz- de box-sizing son para navegadores muy antiguos. */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  /* Evita que iOS y Firefox móvil agranden el texto por su cuenta */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #222222;
+  background-color: #f4f7fb;
+
+  /* Grid: header, nav, main y footer (el footer queda siempre abajo) */
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+h2 {
+  font-size: 1.75rem;
+  color: #1f3a5f;
+  border-bottom: 2px solid #1f3a5f;
+  padding-bottom: 4px;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 1.25rem;
+  color: #1f3a5f;
+  margin: 12px 0 6px;
+}
+
+/* Imágenes y videos adaptables */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- Accesibilidad ----- */
+
+/* Indicador de foco visible (amarillo + anillo oscuro: se ve sobre fondo claro y oscuro) */
+:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 5px #1f3a5f;
+}
+
+/* Enlace "Saltar al contenido": oculto hasta que recibe el foco con el teclado */
+.saltar-contenido {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  background-color: #ffffff;
+  color: #1f3a5f;
+  padding: 8px 12px;
+  font-weight: bold;
+  z-index: 10;
+}
+
+.saltar-contenido:focus {
+  top: 8px;
+}
+
+/* ----- Cabecera ----- */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  background-color: #1f3a5f; /* respaldo si el navegador no soporta degradados */
+  background-image: -webkit-linear-gradient(315deg, #1f3a5f 0%, #2c4f7c 100%);
+  background-image: linear-gradient(135deg, #1f3a5f 0%, #2c4f7c 100%);
+  border-bottom: 4px solid #ffbf47;
+  color: #ffffff;
+  padding: 48px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  font-size: 1.125rem;
+  font-style: italic;
+}
+
+/* ----- Barra de navegación ----- */
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #2c4f7c;
+  padding: 10px 12px;
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 8px;
+  list-style: none;
+}
+
+nav a {
+  display: block;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+nav a:hover {
+  background-color: #1f3a5f;
+  text-decoration: underline;
+}
+
+/* Botón de hamburguesa: oculto en pantallas grandes */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 4px;
+  padding: 8px 14px;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* Quita el relleno interno extra que Firefox pone en los botones */
+.menu-toggle::-moz-focus-inner {
+  border: 0;
+}
+
+/* Icono de hamburguesa dibujado con CSS: una barra + ::before y ::after */
+.icono-menu,
+.icono-menu::before,
+.icono-menu::after {
+  display: block;
+  width: 22px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  -webkit-transition: top 0.2s ease, background-color 0.2s ease, -webkit-transform 0.2s ease;
+  transition: top 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+}
+
+.icono-menu {
+  position: relative;
+}
+
+.icono-menu::before,
+.icono-menu::after {
+  content: "";
+  position: absolute;
+  left: 0;
+}
+
+.icono-menu::before { top: -7px; }
+.icono-menu::after  { top: 7px; }
+
+/* Con el menú abierto, la hamburguesa se convierte en una X */
+.menu-toggle[aria-expanded="true"] .icono-menu {
+  background-color: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .icono-menu::before {
+  top: 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .icono-menu::after {
+  top: 0;
+  -webkit-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+/* =====================================================================
+   PASO 4 · ESTILOS DE LAS SECCIONES
+   ===================================================================== */
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* ----- Acerca de mí: texto alineado a la izquierda, más grande y con más espacio ----- */
+#sobre-mi p {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  text-align: left;
+}
+
+/* ----- Proyectos: tarjetas con Flexbox, margin y padding ----- */
+.proyectos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -12px; /* compensa el margen de las tarjetas */
+}
+
+article {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 260px;
+  margin: 12px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #d5dfeb;
+  border-radius: 8px;
+  -webkit-box-shadow: 0 2px 6px rgba(31, 58, 95, 0.12);
+  box-shadow: 0 2px 6px rgba(31, 58, 95, 0.12);
+  -webkit-transition: -webkit-transform 0.2s ease, -webkit-box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+article:hover {
+  -webkit-transform: translateY(-4px);
+  -ms-transform: translateY(-4px);
+  transform: translateY(-4px);
+  -webkit-box-shadow: 0 8px 18px rgba(31, 58, 95, 0.2);
+  box-shadow: 0 8px 18px rgba(31, 58, 95, 0.2);
+}
+
+figure img {
+  border-radius: 4px;
+}
+
+figcaption {
+  font-size: 0.875rem;
+  color: #3d4a5c;
+  margin-top: 6px;
+}
+
+/* ----- Habilidades: lista con iconos hechos con ::before ----- */
+.habilidades-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  list-style: none;
+}
+
+.habilidades-lista li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #ffffff;
+  border: 1px solid #d5dfeb;
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+/* Icono genérico (una marca de verificación). Las reglas de abajo lo cambian por habilidad.
+   La segunda declaración content (con "/ ''") le dice a los lectores de pantalla que
+   lo ignoren; los navegadores que no la entienden usan la primera. */
+.habilidades-lista li::before {
+  content: "\2713";
+  content: "\2713" / "";
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  height: 2rem;
+  padding: 0 6px;
+  border-radius: 4px;
+  background-color: #1f3a5f;
+  color: #ffffff;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.habilidades-lista li:nth-child(1)::before { content: "#";    content: "#" / ""; }
+.habilidades-lista li:nth-child(2)::before { content: "</>";  content: "</>" / ""; }
+.habilidades-lista li:nth-child(3)::before { content: "{ }";  content: "{ }" / ""; }
+.habilidades-lista li:nth-child(4)::before { content: "JS";   content: "JS" / ""; }
+.habilidades-lista li:nth-child(5)::before { content: "\25A3"; content: "\25A3" / ""; }
+.habilidades-lista li:nth-child(6)::before { content: "\2713"; content: "\2713" / ""; }
+.habilidades-lista li:nth-child(7)::before { content: "\21C4"; content: "\21C4" / ""; }
+.habilidades-lista li:nth-child(8)::before { content: "a11y"; content: "a11y" / ""; }
+
+/* ----- Formulario de contacto ----- */
+#contacto p {
+  margin-bottom: 16px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 560px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-weight: bold;
+  color: #1f3a5f;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: #222222;
+  background-color: #ffffff;
+  padding: 10px;
+  border: 2px solid #5a6b7f;
+  border-radius: 4px;
+  /* Quita el aspecto propio de Safari/iOS para que se vea igual en todos los navegadores */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #1f3a5f;
+}
+
+button[type="submit"] {
+  align-self: flex-start;
+  font: inherit;
+  font-weight: bold;
+  background-color: #1f3a5f;
+  color: #ffffff;
+  border: 2px solid #1f3a5f;
+  border-radius: 4px;
+  padding: 10px 24px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+
+button[type="submit"]::-moz-focus-inner {
+  border: 0;
+}
+
+button[type="submit"]:hover {
+  background-color: #2c4f7c;
+}
+
+/* ----- Pie de página ----- */
+footer {
+  background-color: #1f3a5f;
+  color: #ffffff;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.875rem;
+}
+
+/* =====================================================================
+   PASO 5 · DISEÑO ADAPTATIVO (punto de interrupción en 768px)
+   ===================================================================== */
+
+/* Tabletas: dos tarjetas por fila */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  article {
+    flex: 0 1 calc(50% - 24px);
+  }
+}
+
+/* Pantallas de menos de 768px */
+@media (max-width: 767.98px) {
+  header {
+    padding: 32px 16px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  main {
+    padding: 28px 16px;
+    gap: 36px;
+  }
+
+  button[type="submit"] {
+    align-self: stretch;
+  }
+
+  /* Menú móvil: solo si JavaScript está activo (si no, la lista queda visible) */
+  .js .menu-toggle {
+    display: inline-flex;
+  }
+
+  .js nav ul {
+    display: none;
+    margin-top: 10px;
+  }
+
+  .js nav.abierto ul {
+    display: flex;
+  }
+
+  .js nav ul li {
+    width: 100%;
+  }
+
+  .js nav ul a {
+    text-align: center;
+  }
+}
+
+/* Respeta a quien prefiere menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
